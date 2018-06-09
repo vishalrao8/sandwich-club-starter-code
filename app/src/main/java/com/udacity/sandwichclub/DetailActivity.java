@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
@@ -60,9 +61,21 @@ public class DetailActivity extends AppCompatActivity {
         populateUI(sandwich);
 
         // Populating image from URL into ImageView
-        Picasso.with(this)
+        Picasso.get()
                 .load(sandwich.getImage())
-                .into(ingredientsIv);
+                .into(ingredientsIv, new Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Picasso.get()
+                                .load("https://ysdatagraph.s3.amazonaws.com/uploads/production/medium/file/bf3d780e-3f2b-4f41-80bc-d067b8b00080/square_e5acfc093f")
+                                .into(ingredientsIv);
+                    }
+                });
 
         // Updating title with main name
         setTitle(sandwich.getMainName());

@@ -1,7 +1,5 @@
 package com.udacity.sandwichclub.utils;
 
-import android.util.TypedValue;
-
 import com.udacity.sandwichclub.model.Sandwich;
 
 import org.json.JSONArray;
@@ -9,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class JsonUtils {
@@ -37,7 +34,7 @@ public class JsonUtils {
                 JSONArray alsoKnownAsArray = sandwichNameInfo.getJSONArray("alsoKnownAs");
                 if (alsoKnownAsArray.length() > 0) {
 
-                    alsoKnownAs = Arrays.asList(alsoKnownAsArray.getString(0));
+                    alsoKnownAs.add(alsoKnownAsArray.getString(0));
 
                 } else
                     alsoKnownAs.add("N/A");

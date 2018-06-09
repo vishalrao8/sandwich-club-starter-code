@@ -5,7 +5,6 @@
 
     <!-- Dimensions for Text Views -->
 
-    <dimen name="text_label_margin">16dp</dimen>
     <dimen name="short_text_horizontal_margin">8dp</dimen>
     <dimen name="detailed_text_vertical_margin">32dp</dimen>
     <dimen name="detailed_text_horizontal_margin">24dp</dimen>
