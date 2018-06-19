@@ -128,4 +128,14 @@
         </item>
     </string-array>
 
+     <!-- String tags for parsing JSON data -->
+    <string name="name_tag">name</string>
+    <string name="also_known_as_tag">alsoKnownAs</string>
+    <string name="not_applicable">N/A</string>
+    <string name="main_name_tag">mainName</string>
+    <string name="place_of_origin_tag">placeOfOrigin</string>
+    <string name="description_tag">description</string>
+    <string name="image_tag">image</string>
+    <string name="ingredients_tag">ingredients</string>
+
 </resources>

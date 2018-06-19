@@ -3,7 +3,9 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView placeOfOriginTv;
     private TextView descriptionTv;
     private TextView ingredientsTv;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class DetailActivity extends AppCompatActivity {
         placeOfOriginTv = findViewById(R.id.origin_tv);
         descriptionTv = findViewById(R.id.description_tv);
         ingredientsTv = findViewById(R.id.ingredients_tv);
+        progressBar = findViewById(R.id.progressBar);
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -50,7 +54,7 @@ public class DetailActivity extends AppCompatActivity {
         // Getting JSON String from resources
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
         String json = sandwiches[position];
-        Sandwich sandwich = JsonUtils.parseSandwichJson(json);
+        Sandwich sandwich = JsonUtils.parseSandwichJson(json, this);
         if (sandwich == null) {
             // Sandwich data unavailable
             closeOnError();
@@ -63,17 +67,22 @@ public class DetailActivity extends AppCompatActivity {
         // Populating image from URL into ImageView
         Picasso.get()
                 .load(sandwich.getImage())
+                .error(R.drawable.ic_error)
                 .into(ingredientsIv, new Callback() {
                     @Override
                     public void onSuccess() {
+
+                        if (progressBar != null)
+                            progressBar.setVisibility(View.GONE);
 
                     }
 
                     @Override
                     public void onError(Exception e) {
-                        Picasso.get()
-                                .load("https://ysdatagraph.s3.amazonaws.com/uploads/production/medium/file/bf3d780e-3f2b-4f41-80bc-d067b8b00080/square_e5acfc093f")
-                                .into(ingredientsIv);
+
+                        if (progressBar != null)
+                            progressBar.setVisibility(View.GONE);
+
                     }
                 });
 
